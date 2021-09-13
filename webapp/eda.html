@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+   #description{
+       color:gray;
+   }
+   td{
+       text-align: right;
+   }
+   table{
+       border-collapse: collapse;
+       border: 2px solid black
+   }
+   th{
+       background-color: lightgray;
+   }
+   th{
+       text-align: right;
+   }
+</style>
+ 
+ 
+ 
+ 
+ 
+</head>
+<body>
+   <h1>Exploratory Data Analysis</h1>
+   <p id='description'>The purpose of this page is to show various data related to both our dataset and our models.</p>
+<br>
+   <h2>Examination of the Frequency of Words in our Corpus</h2>
+   <p> The first thing that should be noted is that between the two Subreddits we examined, r/darksouls and r/sekiro, is that there is a large correlation in how often a word appears.</p>
+ 
+ 
+   <img src="http://www.andrewgossage.net/wp-content/uploads/2021/09/occurences.png"> </img>
+   <p>
+       This had an effect on how our models behaved as well. As you can see the relative importance of words with a large occurence gap ended up being very small. Below is a representation of this for both a Logistic Regression and Random Forest Model.
+   </p>
+   <img src="http://www.andrewgossage.net/wp-content/uploads/2021/09/LogReg-V-Gap.png"> </img>
+   <img src="http://www.andrewgossage.net/wp-content/uploads/2021/09/RF-V-Gap.png"> </img>
+   <p>
+       Our Logistic Regression model only looked at words that occured between 100 and 400 times. However, no such restriction was placed on the Random Forest model. This has an impact on the scale of importance a given word will find itself in but this does not seem to change the relative importance of a word's difference in occurences.
+   </p>
+   <p>
+       What we can gather from the above is that the individual importance of words was not very high and that both models instead relied on a large number or different words. This makes sense as the corpus included roughly 20,400 posts.
+   </p>
+   <p>   
+       Below we have listed the 20 most important word entries. These were retrieved by comparing the top 250 words from each model and taking those that appeared in both. These were then sorted by the importance of the Logistic model. The top 20 of those are presented here. A negative Coefficients means that the Logistic model was more likely to be selected for Sekiro. Conversely a larger positive coefficients would push the model towards selecting for Dark Souls. The Logistic Regression importance is taken from the absolute value of the coefficients. The Random Forest importance is based off what percentage of the Gini impurity a split on that word was likely to produce.
+   </p>
+<table border="1" class="dataframe">  <thead>    <tr style="text-align: right;">      <th>Entry</th>      <th>Random Forest Importance</th>      <th>Logistic Regression Coefficients</th>      <th>Logistic Regression Importance</th>    </tr>  </thead>  <tbody>    <tr>      <th>deleted</th>      <td>0.026606</td>      <td>-5.066097</td>      <td>5.066097</td>    </tr>    <tr>      <th>gauntlets</th>      <td>0.016747</td>      <td>-2.562937</td>      <td>2.562937</td>    </tr>    <tr>      <th>bar</th>      <td>0.016296</td>      <td>-1.419464</td>      <td>1.419464</td>    </tr>    <tr>      <th>blighttown</th>      <td>0.012711</td>      <td>2.755551</td>      <td>2.755551</td>    </tr>    <tr>      <th>gwyn</th>      <td>0.012700</td>      <td>2.285476</td>      <td>2.285476</td>    </tr>    <tr>      <th>grind</th>      <td>0.012141</td>      <td>-2.074051</td>      <td>2.074051</td>    </tr>    <tr>      <th>humanity</th>      <td>0.011499</td>      <td>1.306646</td>      <td>1.306646</td>    </tr>    <tr>      <th>warrior</th>      <td>0.011330</td>      <td>-1.890887</td>      <td>1.890887</td>    </tr>    <tr>      <th>mean</th>      <td>0.011040</td>      <td>1.408761</td>      <td>1.408761</td>    </tr>    <tr>      <th>skills</th>      <td>0.010916</td>      <td>-1.308653</td>      <td>1.308653</td>    </tr>    <tr>      <th>prayer</th>      <td>0.010566</td>      <td>-1.837720</td>      <td>1.837720</td>    </tr>    <tr>      <th>reddit</th>      <td>0.010423</td>      <td>-1.137326</td>      <td>1.137326</td>    </tr>    <tr>      <th>teach</th>      <td>0.009544</td>      <td>-1.032802</td>      <td>1.032802</td>    </tr>    <tr>      <th>thinking</th>      <td>0.009241</td>      <td>-1.533699</td>      <td>1.533699</td>    </tr>    <tr>      <th>strength</th>      <td>0.009109</td>      <td>1.096729</td>      <td>1.096729</td>    </tr>    <tr>      <th>mod</th>      <td>0.009033</td>      <td>-4.515762</td>      <td>4.515762</td>    </tr>    <tr>      <th>shield</th>      <td>0.008747</td>      <td>1.455295</td>      <td>1.455295</td>    </tr>    <tr>      <th>build</th>      <td>0.008736</td>      <td>2.971656</td>      <td>2.971656</td>    </tr>    <tr>      <th>different</th>      <td>0.008317</td>      <td>1.614436</td>      <td>1.614436</td>    </tr>    <tr>      <th>flame</th>      <td>0.008194</td>      <td>0.787640</td>      <td>0.787640</td>    </tr>  </tbody></table>'
+ 
+</body>
