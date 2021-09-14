@@ -1,4 +1,4 @@
-python==3.6
+python==3.8
 
 conda==4.4.10
 html5lib==1.0.1
